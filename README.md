@@ -26,7 +26,7 @@ To run the project locally, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-repo/secretsanta-core.git
+   git clone https://github.com/ajcdev1227/SecretSanta_Core.git
    ```
 2. **Create the MS SQL database**
 
