@@ -1,0 +1,130 @@
+﻿@model List<SecretSanta_Core.Models.AdoptAHeartModel>
+@{
+	ViewBag.Title = "Adopt A Heart At Home";
+	var pageSize = ViewBag.PageSize;
+	var count = ViewBag.Count;
+	var pageNumber = ViewBag.PageNumber;
+}
+
+<h1>Adopt A Heart At Home</h1>
+<div>
+	<h4>Select a heart wish below and click it to view instructions. You can fulfill heart wishes with a gift, or by funding the gift online.</h4>
+	<h4>All gifts are due by @ViewBag.GiftDueDate.</h4>
+	<input type="hidden" id="pageSize" value="@ViewBag.PageSize" />
+	<input type="hidden" id="count" value="@ViewBag.Count" />
+	<input type="hidden" id="page" value="@pageNumber" />
+	<div class="d-flex justify-content-center align-items-center p-5">
+		<div>
+			<span class="nowrap">Adopt heart for</span>&nbsp;
+		</div>
+		<div>
+			<span>Gender&nbsp;</span>
+			<select id="gender" class="form-control">
+				<option value="">Select</option>
+				<option value="M">M</option>
+				<option value="F">F</option>
+				<option value="NB">NB</option>
+			</select>&nbsp;
+		</div>
+		<div>
+			<span>Age&nbsp;(yrs)&nbsp;</span>
+			<select id="age" class="form-control">
+				<option value="">Select</option>
+				<option value="1">0 - 12</option>
+				<option value="2">13 - 24</option>
+				<option value="3">25 - 36</option>
+				<option value="4">37 - 64</option>
+				<option value="5">65+</option>
+			</select>&nbsp;
+		</div>
+		<div>
+			<span class="nowrap">Wish Type&nbsp;</span>
+			<select id="giftType" class="form-control">
+				<option value="">Select</option>
+				@foreach (var item in (Dictionary<int, string>)ViewBag.GiftTypes)
+				{
+					<option value="@item.Key">@item.Value</option>
+				}
+			</select>&nbsp;
+		</div>
+		<div>
+			<input type="button" id="clear" value="Clear" class="btn btn-primary" />
+		</div>
+	</div>
+</div>
+<div id="hearts">
+	@for (var i = 0; i < Model.Count; i += 3)
+	{
+		<div class="row">
+			@for (int j = i; j <= Math.Min(2 + i, Model.Count - 1); j++)
+			{
+				<div class="col-md-4">
+					<a href="@Url.Action("AdoptHeart", "AdoptHeart", new { id = Model[j].RecipientNumber })" style="text-decoration:none">
+						<div class="heart">
+							<div class="intro-message">
+								<div class="italicize big-heart-text">Secret Santa @Model[j].DateEntered.Year</div>
+								<div class="md-heart-text">@Model[j].NameAgeGenderString</div>
+								<div class="md-heart-text">@Model[j].RecipientInfo</div>
+								<div class="sm-heart-text">First Wish: @Model[j].FirstWishString</div>
+								<div class="sm-heart-text">Second Wish: @Model[j].SecondWishString</div>
+								<div class="big-text bold">R#&nbsp;@Model[j].RecipientNumber</div>
+							</div>
+						</div>
+					</a>
+
+				</div>
+			}
+		</div>
+	}
+</div>
+@if (Model.Any())
+{
+	<div class="row text-center">
+		<div class="col-lg-12">
+			<ul id="pagination" class="pagination list-group list-group-horizontal">
+				@{
+					var c = (int)Math.Ceiling((double)count / (double)pageSize);
+				}
+				@if (pageNumber > 1)
+				{
+					<li class="list-group-item">
+						<a href="#" class="pageBack"><i class="fa-solid fa-chevron-left"></i></a>
+					</li>
+				}
+				@for (int i = Math.Min(pageNumber, c < 6 ? 1 : c - 4); i < Math.Min(5 + pageNumber, c + 1); i++)
+				{
+
+					if (i == pageNumber)
+					{
+						<li class="active list-group-item">
+							<a href="#">@i.ToString()</a>
+						</li>
+					}
+					else
+					{
+						<li class="list-group-item">
+							<a href="#" class="page" id="@i">@i.ToString()</a>
+						</li>
+					}
+
+				}
+				@if (pageNumber < c)
+				{
+					<li class="list-group-item">
+						<a href="#" class="pageForward"><i class="fa-solid fa-chevron-right"></i></a>
+					</li>
+				}
+			</ul>
+
+		</div>
+	</div>
+}
+
+@section Scripts {
+	<environment names="Development">
+		<script src="~/js/adoptfromhome.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/adoptfromhome.min.js"></script>
+	</environment>
+}

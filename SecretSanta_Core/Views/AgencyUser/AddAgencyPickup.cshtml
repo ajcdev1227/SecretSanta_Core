@@ -1,0 +1,42 @@
+﻿@model SecretSanta_Core.Models.AgencyPickUpModel
+@{
+    ViewData["Title"] = "Add Agency Pickup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add Agency Pickup</h1>
+
+<form asp-action="AddAgencyPickup">
+    <input type="hidden" asp-for="AgencyId"/>
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <div class="row pb-1">
+        <div class="col-md-2">
+            <label asp-for="FirstName" class="col-form-label"></label>
+        </div>
+        <div class="col-md-10">
+            <input asp-for="FirstName" class="col-form-label"/>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row pb-1">
+        <div class="col-md-2">
+            <label asp-for="LastName" class="col-form-label"></label>
+        </div>
+        <div class="col-md-10">
+            <input asp-for="LastName" class="col-form-label"/>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row pb-1">
+        <div class="col-md-2">
+            <label asp-for="Notes" class="col-form-label"></label>
+        </div>
+        <div class="col-md-10">
+            <input asp-for="Notes" class="col-form-label"/>
+        </div>
+    </div>
+    <div class="offset-2 col-md-4">
+        <input type="submit" value="Add" class="btn btn-primary"/>
+    </div>
+
+</form>

@@ -1,0 +1,324 @@
+﻿@using Microsoft.AspNetCore.Mvc.Routing
+@{
+	void ShowExtraMenuItems(bool isMain = false)
+	{
+		<li @(isMain ? "class=\"nav-item\"" : "")>
+			<a class="@(isMain ? "nav-link" : "dropdown-item")" href="https://blog.secretsantanow.org/donate/">Donate</a>
+		</li>
+		<li @(isMain ? "class=\"nav-item\"" : "")>
+			<a class="@(isMain ? "nav-link" : "dropdown-item")" href="https://www.volunteernow.org/special-event/a0M5a00000YyzBMEAZ">Volunteer</a>
+		</li>
+		<li @(isMain ? "class=\"nav-item\"" : "")>
+			<a class="@(isMain ? "nav-link" : "dropdown-item")" href="https://blog.secretsantanow.org/sponsor-letter/">Sponsor</a>
+		</li>
+	}
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"]</title>
+	<link href="~/jquery-ui-1.13.2/jquery-ui.min.css" rel="stylesheet" />
+	<link href="~/font-awesome/css/all.min.css" rel="stylesheet" />
+	<link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<environment names="Development">
+		<link rel="stylesheet" href="~/css/site.css" />
+	</environment>
+	<environment exclude="Development">
+		<link rel="stylesheet" href="~/css/site.min.css" />
+	</environment>
+	
+</head>
+<body>
+	<div class="container">
+		<div class="flex-container">
+			<div class="main-left">
+				<a href="@Url.Action("Index", "Home")">
+					<img src="~/Images/Header/secret-santa-now-logo-768x230.jpg" class="img-fluid" />
+				</a>
+			</div>
+			<div class="main-right">
+				<div class="flex-container">
+					<div class="sub-main">
+						<img src="~/Images/Header/KZST_logo_2-300x128.png" class="img-fluid" />
+					</div>
+					<div class="sub-main">
+						<img src="~/Images/Header/cvnl-300x127.png" class="img-fluid" />
+					</div>
+					<div class="sub-main">
+						<img src="~/Images/Header/friedmans-300x114.jpeg" class="img-fluid" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							About
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown0">
+							<li><a class="dropdown-item" href="https://blog.secretsantanow.org/what-is-secret-santa/">What is Secret Santa?</a></li>
+							<li><a class="dropdown-item" href="@Url.Action("Sponsors", "LearnMore")">Sponsors</a></li>
+							<li><a class="dropdown-item" href="@Url.Action("Agencies", "LearnMore")">Agencies</a></li>
+							<li><a class="dropdown-item" href="https://blog.secretsantanow.org/photos/">Photos &amp; Videos</a></li>
+							<li><a class="dropdown-item" href="https://blog.secretsantanow.org/testimonials/">Testimonials</a></li>
+						</ul>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="@Url.Action("DropOffLocations", "LearnMore")">Secret Santa Locations</a></li>
+					@if (User.IsInRole("Primary") || User.IsInRole("Standard") || User.IsInRole("Leader"))
+					{
+						<li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "SantaLetter")"> Write a Letter</a></li>
+					}
+					<li class="nav-item  dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown5" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Adopt a Heart
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
+							<li><a class="dropdown-item" href="@Url.Action("AdoptFromHome", "AdoptHeart")">Adopt a Heart</a></li>
+							<li><a class="dropdown-item" href="@Url.Action("PrintMoreLabels", "GiftInstructions")">Print a New Heart Tracking Tag</a></li>
+						</ul>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "MyHeart")">Register Heart</a></li>
+					<li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "AdoptLetter")">Adopt a Letter</a></li>
+					@if (!(User.Identity.IsAuthenticated && (User.IsInRole("Leader") || User.IsInRole("Admin") || User.IsInRole("Primary") || User.IsInRole("Standard"))))
+					{
+						ShowExtraMenuItems(true);
+					}
+					@if (User.Identity.IsAuthenticated && (User.IsInRole("Primary") || User.IsInRole("Leader") || User.IsInRole("Standard")))
+					{
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Gift Recipients<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="@Url.Action("Add", "GiftRecipient")">Add A Heart Wish</a></li>
+								<li><a class="dropdown-item" href="@Url.Action("Index", "GiftRecipient")">View Heart Wishes</a></li>
+
+							</ul>
+						</li>
+					}
+					@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+					{
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Admin
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+								<li><a class="dropdown-item" href="@Url.Action("Index", "AgencyUser")">Add Agency User</a></li>
+								<li><a class="dropdown-item" href="@Url.Action("AllAgencyContacts", "AgencyUser")">Manage Agency Users</a></li>
+								<li><a class="dropdown-item" href="@Url.Action("Index", "ApplicationSettings")">Manage Application Settings</a></li>
+							</ul>
+						</li>
+					}
+					@if (User.Identity.IsAuthenticated && (User.IsInRole("Primary") || User.IsInRole("Leader")))
+					{
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Agency Users
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+								<li><a class="dropdown-item" href="@Url.Action("AgencyContacts", "AgencyUser")">Manage Agency Contacts</a></li>
+							</ul>
+						</li>
+					}
+					@if (User.Identity.IsAuthenticated && User.IsInRole("Story Editor"))
+					{
+						<li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Story")">Stories</a></li>
+					}
+
+					@Html.Partial("_LoginPartial")
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+
+
+	<div class="container mt-5 mb-5">
+		@RenderBody()
+	</div>
+
+	<div class="separator"></div>
+
+	<footer class="footer text-muted">
+		<div class="container">
+			
+			<div class="flex-wrap-container menu mb-5">
+				<div class="flex-menu-item">
+					<h4>CVNL</h4>
+					<ul class="list-unstyled">
+						<li>
+							<a href="https://cvnl.org/" class="menulink" target="_blank">
+								<span>Overview</span>
+							</a>
+						</li>
+						<li>
+							<a href="https://www.volunteernow.org/" class="menulink" target="_blank">
+								<span>Volunteer Services</span>
+							</a>
+						</li>
+						<li>
+							<a href="https://cvnl.org/ll-overview/" class="menulink" target="_blank">
+								<span>Learning & Leadership</span>
+							</a>
+						</li>
+						<li>
+							<a href="https://cvnl.org/executive-search/executive-transition-services/" class="menulink" target="_blank">
+								<span>Executive Search</span>
+							</a>
+						</li>
+						<li>
+							<a href="https://cvnl.org/consulting-services/" class="menulink" target="_blank">
+								<span>Consulting</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="flex-menu-item">
+					<h4>SECRET SANTA</h4>
+					<ul class="list-unstyled">
+						<li>
+							<a href="http://blog.secretsantanow.org/what-is-secret-santa/" class="menulink">
+								<span>What is Secret Santa</span>
+							</a>
+						</li>
+						<li>
+							<a href="https://secret-santa-21nw.onrender.com/app/index.html" class="menulink">
+								<span>Heart Central App</span>
+							</a>
+						</li>
+						<li>
+							<a href="@Url.Action("Sponsors", "LearnMore")" class="menulink">
+								<span>Sponsor List</span>
+							</a>
+						</li>
+						<li>
+							<a href="@Url.Action("Agencies", "LearnMore")" class="menulink">
+								<span>Agency List</span>
+							</a>
+						</li>
+						<li>
+							<a href="http://blog.secretsantanow.org/contact/" class="menulink">
+								<span>Contact</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="flex-menu-item">
+					<h4>FOR AGENCIES</h4>
+					<ul class="list-unstyled">
+						<li>
+							<a class="menulink" asp-area="Identity" asp-page="/Account/Login">Login</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="flex-menu-item">
+					<h4>CONTACT</h4>
+					<div>
+						<p>Center for Volunteer &amp; Nonprofit Leadership</p><address>153 Stony Circle, Suite 100<br />Santa Rosa, CA 95401</address>
+						<p><strong><a href="tel:7078908880">707-890-8880</a></strong></p>
+					</div>
+				</div>
+			</div>
+
+			<div class="flex-wrap-container" style="background-color: #dcdcdc;">
+				<div class="footer-item">
+					<div class="flex-wrap-container">
+						<div class="top-footer-item">
+							<a href="https://cvnl.org/" target="_blank">
+								<img src="~/Images/Footer/cvnl.png" class="img-fluid" />
+							</a>
+						</div>
+						<div class="bottom-footer-item">Get to know CVNL</div>
+					</div>
+				</div>
+				<div class="footer-item">
+					<div class="flex-column-container">
+						<div style="padding: 8%">
+							<div>
+								<span class="text-red">Receive the latest news</span>
+							</div>
+							<div class="subtitle"> Subscribe To Our Newsletter</div>
+							<div>
+								<form action="https://cvnl.us3.list-manage.com/subscribe/post?u=97426fad8442d3be2295da800&amp;id=50893243a5&amp;v_id=57&amp;f_id=00aac3e1f0" method="post" target="_blank">
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" required="required" name="EMAIL" id="mce-EMAIL" />
+										<label for="mce-EMAIL">Email Address</label>
+									</div>
+									<button type="submit" class="btn btn-secondary" style="float: right">
+										<i class="fa-solid fa-envelope-circle-check"></i> Subscribe
+									</button>
+									<div style="position: absolute; left: -5000px;" aria-hidden="true">
+										<input type="text" name="b_97426fad8442d3be2295da800_50893243a5" tabindex="-1" value="" />
+									</div>
+								</form>
+							</div>
+						</div>
+						<div style="padding: 8%">
+							<div class="flex-wrap-container">
+								<div class="left-footer-item">
+									<span class="subtitle">Follow Us Here</span>
+								</div>
+								<div class="right-footer-item">
+									<span>
+										<a href="https://www.facebook.com/CVNL.BayArea" target="_blank">
+											<i class="icon fa-brands fa-facebook fa-2x"></i>
+										</a>
+									</span>
+									<span>
+										<a href="https://twitter.com/Capacity4Change" target="_blank">
+											<i class="icon fa-brands fa-twitter fa-2x"></i>
+										</a>
+									</span>
+									<span>
+										<a href="https://www.instagram.com/capacity4change/" target="_blank">
+											<i class="icon fa-brands fa-instagram fa-2x"></i>
+										</a>
+									</span>
+									<span>
+										<a href="https://www.youtube.com/channel/UCNEpyc20ydS0xp6zf-tP6uQ" target="_blank">
+											<i class="icon fa-brands fa-youtube fa-2x"></i>
+										</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="flex-wrap-container copywrite" style="padding-top: 10px; padding-bottom: 15px;">
+				<div class="footer-item">
+					CVNL &#8211; Center for Volunteer &amp; Nonprofit Leadership
+				</div>
+				<div class="copywrite-footer-item">
+					All Rights Reserved © 2021
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="~/jquery/jquery.min.js"></script>
+	<script src="~/jquery-ui-1.13.2/jquery-ui.min.js"></script>
+	<script src="~/jquery-validate/jquery.validate.min.js"></script>
+	<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script src="~/font-awesome/js/all.min.js"></script>
+	<script src="~/jquery-mask-plugin/jquery.inputmask.min.js"></script>
+	<script src="~/sweetalert/sweetalert.min.js"></script>
+	<script src="~/js/site.min.js" asp-append-version="true"></script>
+	@RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿@model SecretSanta_Core.Models.AdoptLetterModel
+@{
+    ViewData["Title"] = "Print Letter";
+    Layout = "~/Views/Shared/_LayoutSimple.cshtml";
+}
+<h1>Print Letter</h1>
+<div class="container">
+    <div class='offset-10 col-md-2' id="divPrint" style='padding-bottom:10px'>
+        <button id="print" class="btn btn-secondary"><i class="fa-solid fa-print fa-2x" aria-hidden="true"></i></button>
+    </div>
+    <div id="wrapper">
+    <h1>Letter # @Model.LetterId @Model.LetterSummary</h1>
+    <div style="height:20px"></div>
+        <div>
+            @Html.Raw(Model.Letter)
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <environment names="Development">
+        <script src="~/js/print.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/print.min.js"></script>
+    </environment>
+}

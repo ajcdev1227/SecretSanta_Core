@@ -1,0 +1,18 @@
+﻿@model SecretSanta_Core.Models.LetterModel
+@{
+    ViewData["Title"] = "Santa Letter";
+    Layout = "~/Views/Shared/_LayoutLetter.cshtml";
+}
+
+<h3>Dear Secret Santa:</h3>
+
+<form asp-action="AddLetter">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <div>
+        <textarea asp-for="LetterText" rows="30" class="form-control"></textarea>
+        <span asp-validation-for="LetterText" class="text-danger"></span>
+    </div>
+    <div class="offset-2 col-md-2 pt-3">
+        <button type="submit" id="next" class="btn btn-primary">Next</button>
+    </div>
+</form>

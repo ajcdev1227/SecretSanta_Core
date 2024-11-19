@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SecretSanta_Core.Models.StoryModel>
+@{
+    ViewData["Title"] = "Stories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Stories</h2>
+    </div>
+    <div class="col-md-6 text-center">
+        <input type="button" value="New Story" id="add" class="btn btn-primary" />
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StoryId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+@section Scripts
+{
+    <environment names="Development">
+        <script src="~/js/storyindex.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/storyindex.min.js"></script>
+    </environment>
+}
+
+

@@ -1,0 +1,132 @@
+﻿@model SecretSanta_Core.Models.WriterInfoModel
+@{
+	ViewData["Title"] = "Writer Info";
+	Layout = "~/Views/Shared/_LayoutLetter.cshtml";
+}
+
+<h3>Please provide the following required information for your client. Use your name and email address for contact information</h3>
+
+<form id="writerinfo" asp-action="WriterInfo">
+	<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+	<div class="row">
+		<div class="col-md-6 col-lg-6">
+			<div class="card mb-3">
+				<div class="card-header">Your Information</div>
+				<div class="card-body">
+					<div class="mb-3 mt-3">
+						<label asp-for="WriterName" class="form-label"></label>
+						<input asp-for="WriterName" class="form-control" maxlength="200" required />
+						<span asp-validation-for="WriterName" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3 mt-3">
+						<label asp-for="Phone" class="form-label"></label>
+						<input asp-for="Phone" class="form-control phone" required />
+						<span asp-validation-for="Phone" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3 mt-3">
+						<label asp-for="Email" class="form-label"></label>
+						<input asp-for="Email" type="email" class="form-control" maxlength="200" required />
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+					<div class="mb-3 mt-3">
+						<label asp-for="Agency" class="form-label">Agency</label>
+						<select asp-for="Agency" asp-items="(SelectList)ViewBag.Agencies" class="form-select" required>
+							<option value="">Select</option>
+						</select>
+						<span asp-validation-for="Agency" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-6">
+			<div class="card">
+				<div class="card-header">THE PERSON YOU ARE WRITING THE LETTER FOR</div>
+				<div class="card-body">
+					<div class="mb-3 mt-3">
+						<label asp-for="FirstName" class="form-label"></label>
+						<input asp-for="FirstName" class="form-control" maxlength="100" required />
+						<span asp-validation-for="FirstName" class="text-danger"></span>
+
+					</div>
+					<div class="mb-3 mt-3">
+						<label asp-for="LastName" class="form-label"></label>
+						<input asp-for="LastName" class="form-control" maxlength="100" required />
+						<span asp-validation-for="LastName" class="text-danger"></span>
+					</div>
+					<div class="mb-3 mt-3">
+						<label asp-for="Address" class="form-label"></label>
+						<input asp-for="Address" class="form-control" maxlength="250" required />
+						<span asp-validation-for="Address" class="text-danger"></span>
+
+					</div>
+					<div class="mb-3 mt-3">
+						<label asp-for="City" class="form-label"></label>
+						<input asp-for="City" class="form-control" maxlength="100" required />
+						<span asp-validation-for="City" class="text-danger"></span>
+					</div>
+					<div class="mb-3 mt-3">
+						<label asp-for="Zip" class="form-label"></label>
+						<input asp-for="Zip" class="form-control" maxlength="10" required />
+						<span asp-validation-for="Zip" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="d-flex flex-row-reverse pt-3">
+		<button type="button" id="next" class="btn btn-secondary">Next</button>
+	</div>
+</form>
+
+<div id="modalSuggestedAddress" class="modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Please verify your address</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<h4>We suggest an address modification</h4>
+				<div id="suggested_address"></div>
+				<div id="suggested_city"></div>
+				<div id="suggested_zip"></div>
+				<div class="spacer-small"></div>
+				<div>
+					<input type="radio" id="use_suggested" /><label for="use_suggested">&nbsp;&nbsp;Use this address</label>
+				</div>
+				<div>
+					<input type="radio" id="use_original" /><label for="use_original">&nbsp;&nbsp;Use the address I entered</label>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="submit" class="btn btn-primary">Next</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="notSonoma" class="modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">This zip code in not in Sonoma County.  Please try again.</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<environment names="Development">
+		<script src="~/js/writerinfo.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/writerinfo.min.js"></script>
+	</environment>
+}

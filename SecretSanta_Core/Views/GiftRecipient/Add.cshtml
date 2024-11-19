@@ -1,0 +1,275 @@
+﻿@model SecretSanta_Core.Models.GiftRecipientModel
+
+@{
+	ViewBag.Title = "Add A Heart Wish";
+}
+
+<h1>Add A Heart Wish</h1>
+<div class="row">
+	<div class="col-md-8 col-lg-8">
+		<form asp-action="Add">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" id="agencyId" value="@ViewBag.AgencyID" />
+			<input type="hidden" id="locationNecessary" value="@ViewBag.HasLocations">
+			<label>@ViewBag.AgencyName</label>
+
+			<div class="card mb-3">
+				<div class="card-header">Recipient Info</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-floating mb-3 mt-3">
+								@if (Convert.ToBoolean(@ViewBag.HasLocations))
+								{
+									<select asp-for="Location" asp-items="(SelectList)ViewBag.Locations" class="form-select" required>
+										<option value="">Select</option>
+									</select>
+									<label asp-for="Location">Location <span style="color:red">(*required)</span></label>
+								}
+								else
+								{
+									<input asp-for="Location" class="form-control" maxlength="4" />
+									<label asp-for="Location">Location (not required)</label>
+								}
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-floating mb-3 mt-3">
+								<input asp-for="Name" class="form-control" maxlength="20" required>
+								<label asp-for="Name"></label>
+								<a id="btnNameInfo" class="info">
+									<i class="fa-solid fa-info-circle"></i>
+								</a>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="input-group mb-3 mt-3">
+								<div class="form-floating">
+									<input asp-for="Age" class="form-control" max="200" />
+									<label asp-for="Age" class="col-form-label"></label>
+								</div>
+
+								<select asp-for="AgeType" class="form-select">
+									<option value="years">years</option>
+									<option value="months">months</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-floating mb-3 mt-3">
+								<select asp-for="Gender" class="form-select">
+									<option value="">Select</option>
+									<option value="M">Male</option>
+									<option value="F">Female</option>
+									<option value="NB">Non Binary</option>
+								</select>
+								<label asp-for="Gender"></label>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-floating mb-3 mt-3">
+						<input asp-for="RecipientInfo" class="form-control" maxlength="35" />
+						<label asp-for="RecipientInfo" class="col-form-label"></label>
+						<a id="btnRecipientInfo" class="info"><i class="fa-solid fa-info-circle"></i></a>
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="card mb-3">
+				<div class="card-header">First Wish</div>
+				<div class="card-body">
+					<div class="form-floating mb-3 mt-3">
+						<select asp-for="GiftType" asp-items="(SelectList)ViewBag.GiftTypes" class="form-select">
+							<option>Select One</option>
+						</select>
+						<label asp-for="GiftType"></label>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6 col-lg-6">
+							<div class="form-floating mb-3">
+								<input asp-for="GiftWish" class="form-control" maxlength="25" />
+								<label asp-for="GiftWish"></label>
+								<a class="info info-wish"><i class="fa-solid fa-info-circle"></i></a>
+							</div>
+							<div id="giftWishDetails"></div>
+						</div>
+						<div class="col-md-6 col-lg-6">
+							<div class="blue" id="giftWishDescription"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card mt-3 mb-3">
+				<div class="card-header">Second Wish</div>
+				<div class="card-body">
+					<div class="form-floating mb-3 mt-3">
+						<select asp-for="AltGiftType" asp-items="(SelectList)ViewBag.GiftTypes" class="form-select">
+							<option>Select One</option>
+						</select>
+						<label asp-for="AltGiftType"></label>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-lg-6">
+							<div class="form-floating mb-3">
+								<input asp-for="AltGiftWish" class="form-control" maxlength="25" />
+								<label asp-for="AltGiftWish"></label>
+								<a class="info info-wish"><i class="fa-solid fa-info-circle"></i></a>
+							</div>
+							<div id="altGiftWishDetails"></div>
+						</div>
+						<div class="col-md-6 col-lg-6">
+							<div class="blue" id="altGiftWishDescription"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row d-flex justify-content-center align-items-center mt-3 mb-3">
+				<div class="col-md-6">
+					<input type="button" class="btn btn-secondary" value="SAVE AND EDIT LATER" id="btnSaveEdit" style="float:left" />
+				</div>
+				<div class="col-md-6">
+					<input type="button" class="btn btn-secondary" value="SAVE AND SUBMIT" id="btnSaveSubmit" style="float:right" />
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="col-md-4 col-lg-4">
+		<div class="heart" id="heart">
+			<div class="intro-message">
+				<div class="italicize big-heart-text">Secret Santa @ViewBag.Year</div>
+				<div id="heart_name_age_gender" class="md-heart-text"></div>
+				<div id="heart_recipient_info" class="md-heart-text"></div>
+				<div id="giftwish" class="sm-heart-text"></div>
+				<div id="altgiftwish" class="sm-heart-text"></div>
+				<div class="big-text bold">R#</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modalCloseContinue" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<span>Are you done or do you want to enter another gift recipient?</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-dark" id="btnDone">Done</button>
+				<button type="button" class="btn btn-custom" id="btnAnother">Add Another</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modalWarning" class="modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Error</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div id="errorMessage" class="text-danger"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modalNameInfo" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Enter the first name only.  If your agency has more than one person with the same first name and sex/age, than you can put the first initial of the last name."</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modalWishInfo" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Enter a complete description, think about color, size, or any details to help the person that is buying the gift.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modalRecipientInfo" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<span>
+					What information should I write about the Gift Recipient? Gift wishes that have information about a gift recipient are most likely to be chosen. In many cases, the person picking one of our hearts from a public display makes an emotional decision based on what they imagine about the recipient. Some examples of gift recipient information could be: "Loves blue and trains" or "Likes pink and princesses". "Foster teen – loves music & sports" or "Homeless, mother of 4". "Develop. disabled, group home, great attitude".  "Takes care of sisters while mom works." Even three or four words can make a difference!!
+				</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="heartModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body text-center">
+				<div class="row">
+					<h3>CAREFULLY REVIEW THE HEART</h3>
+				</div>
+				<div class="row" id="heartModalBody"></div>
+				<div>
+					<h4>This is what the donor will see, be sure it is clear and descriptive</h4>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="confirm">FINISHED</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Return to Edit</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div>
+	<a asp-controller="GiftRecipient" asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+	<environment names="Development">
+		<script src="~/js/addgift.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/addgift.min.js"></script>
+	</environment>
+}
+
+

@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SecretSanta_Core.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+	<li class="nav-item">
+		<a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa-solid fa-user"></i></a>
+	</li>
+	<li class="nav-item">
+		<form class="d-flex flex-row align-items-center flex-wrap" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+			<button type="submit" class="nav-link btn btn-link">Logout</button>
+		</form>
+	</li>
+}

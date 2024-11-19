@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Print";
+    Layout = "~/Views/Shared/_LayoutSimple.cshtml";
+}
+
+<h1>Print</h1>
+
+<div class='offset-10 col-md-2' id="divPrint" style='padding-bottom:10px'>
+    <button id="btnPrint" class="btn-secondary"><i class="fa-solid fa-print fa-2x" aria-hidden="true"></i></button>
+</div>
+<div>
+    <h3>@ViewBag.Print</h3>
+    <p>@Html.Raw(ViewBag.LetterPrint)</p>
+</div>

@@ -1,0 +1,39 @@
+﻿@model SecretSanta_Core.Models.GuideMeModel
+@{
+    ViewData["Title"] = "Guide Me";
+    Layout = "~/Views/Shared/_LayoutLetter.cshtml";
+}
+
+<h3>Guide me to write a letter</h3>
+
+<form asp-action="GuideMe">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+    <div class="row mb-3 mt-3">
+        <label for="Problem" style="text-align:justify">Tell us about the problems or issues this person or family is having.      For example, there may be lack of income, or there may be illness or other family crisis.   Or there may have been unexpected expenses such as home or car repairs.</label>
+        <div>
+            <textarea asp-for="Problem" rows="10" class="form-control"></textarea>
+            <span asp-validation-for="Problem" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3 mt-3">
+        <label for="Need" style="text-align:justify">Tell us what is needed from Secret Santa;   this may include very specific things such as a boys bike or a new set of dishes or it may be in general, such as warm clothing, toys.</label>
+        <div>
+            <textarea asp-for="Need" rows="10" class="form-control"></textarea>
+            <span asp-validation-for="Need" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row mb-3 mt-3">
+        <label for="Benefit" style="text-align:justify">If the items above were to be provided, how would this benefit the situation?       You may want to explain that these gifts would help the family stay warm (if they needed warm clothing) or if the request for a bike you might say that this would allow the child to play with other children that also have bikes.</label>
+        <div>
+            <textarea asp-for="Benefit" rows="10" class="form-control"></textarea>
+            <span asp-validation-for="Benefit" class="text-danger"></span>
+        </div>
+    </div>
+    
+    <div class="row">
+        <input type="submit" id="next" value="Next" class="btn btn-primary col-md-2" style="float:right"/>
+    </div>
+</form>
+

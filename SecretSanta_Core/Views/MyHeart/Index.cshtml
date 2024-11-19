@@ -1,0 +1,104 @@
+﻿@model SecretSanta_Core.Models.DonorModel
+
+@{
+	ViewBag.Title = "My Heart";
+}
+
+<h1>My Heart</h1>
+<p>Once registered, you will be able to see all your hearts from this and previous years by clicking “See My Hearts” on the email you receive following each heart adoption or registration.</p>
+<p>To register, enter you label number or recipient number in the box below and enter your login information.</p>
+<input type="hidden" id="barcodeVal" />
+<div class="form-floating">
+	<div class="d-flex justify-content-center align-items-center">
+		<div class="w-50">
+			<div class="p-5"><img src="~/Images/samplelabel.JPG" class="img-fluid" /></div>
+		</div>
+		<div class="w-50">
+			<div class="p-5">
+				Enter Label Number or Recipient Number
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<label class="col-form-label" for="labelNo">Number</label>
+		</div>
+		<div class="col-md-4">
+			<input type="text" id="labelNo" class="form-control" />
+		</div>
+		<div class="col-md-2">
+			<input type="button" id="enter" value="Enter" class="btn btn-primary" />
+		</div>
+	</div>
+	<div id="info" style="display:none">
+		<div class="d-flex justify-content-center align-items-center">
+			<div class="w-50">
+				<div class="p-5">
+					<div>
+						<div style="border: 3px dashed #bcbcbc;">
+							<div class="center">
+								<div class="bold big-text">Dear <span id="name"></span>!</div>
+								<div class="big-text">From Secret Santa&nbsp;<span id="yr"></span></div>
+								<div class="bold big-text"><span id="lNo"></span>&nbsp;- &nbsp;<span id="agencyCode"></span></div>
+								<div class="col-md-9 offset-3">
+									<div id="barcode"></div>
+								</div>
+							</div>
+							<div style="float: left" class="big-text">R#:&nbsp;<span id="recNo"></span></div>
+							<div style="float: right" class="big-text">Gift 1 of _____</div>
+							<div style="clear: both"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="w-50">
+				<div class="p-5">
+					Does this match your label? If not, go back and try a different label number.
+				</div>
+			</div>
+		</div>
+
+		<form id="register" asp-controller="MyHeart" asp-action="Index" method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="RecipientNum" />
+			<div>
+				<div class="checkbox">
+					<input type="checkbox" id="agree" />
+					I agree to these terms: Secret Santa will not share your email. Secret Santa will use your email to send you a thank you and <span class="underline">one</span> reminder next year (and following years) to consider adopting another heart or letter.
+				</div>
+			</div>
+			<div>
+				<div class="col-md-2">
+					<label asp-for="Email" class="col-form-label"></label>
+				</div>
+				<div class="col-sm-10">
+					<input asp-for="Email" class="form-control" />
+					<span asp-validation-for="Email" class="text-danger"></span>
+				</div>
+			</div>
+			<div>
+				<div class="col-md-2">
+					<label asp-for="ConfirmEmail" class="col-form-label"></label>
+				</div>
+				<div class="col-sm-10">
+					<input asp-for="ConfirmEmail" class="form-control" />
+					<span asp-validation-for="ConfirmEmail" class="text-danger"></span>
+				</div>
+			</div>
+
+			<div class="offset-2 col-sm-10">
+				<input id="btnSubmit" type="submit" class="btn btn-primary" value="Register" />
+			</div>
+		</form>
+	</div>
+</div>
+
+@section scripts {
+	<script src="~/jquery-barcode/jquery-barcode.min.js"></script>
+	<environment names="Development">
+		<script src="~/js/registerheart.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/jquery-barcode/registerheart.min.js"></script>
+	</environment>
+}

@@ -1,0 +1,39 @@
+﻿@model List<SecretSanta_Core.Models.ThankYouRecipientModel>
+@{
+    ViewData["Title"] = "ThankYou";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@functions
+{
+
+    string WriteAge(int? age, string ageType)
+    {
+        if (age.HasValue && !string.IsNullOrEmpty(ageType))
+        {
+            return age.Value + " " + ageType;
+        }
+        return String.Empty;
+    }
+
+}
+
+<h1>Recipients Receiving Gifts</h1>
+<div class="santalabel">@ViewBag.AgencyName</div>
+
+<table class='table table-striped'>
+    <tr><th>Recipient Num</th><th>Name</th><th>Age</th><th>Gender</th><th>Info</th><th>First Wish</th><th>Second Wish</th><th></th></tr>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td>@m.RecipientNum</td>
+            <td>@m.Name</td>
+            <td>@WriteAge(m.Age, m.AgeType)</td>
+            <td>@m.Gender</td>
+            <td>@m.RecipientInfo</td>
+            <td>@m.GiftWish</td>
+            <td>@m.AltGiftWish</td>
+            <td><a asp-action="AddThankYou" asp-controller="GiftRecipient" asp-route-id="@m.RecipientNum">Add Thank You</a></td>
+        </tr>
+    }
+</table>

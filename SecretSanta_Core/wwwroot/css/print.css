@@ -1,0 +1,66 @@
+﻿.center {
+     text-align: center;
+ }
+
+.intro-message-lg {
+    padding-top: 0 !important;
+}
+
+
+.intro-message-lg > h1 {
+    font-size: 2.5em !important;
+}
+    .big-text {
+        font-size: 1.2em;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+
+
+
+    .md-text {
+        font-size: 1em;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+
+    .italicize {
+        font-style: italic;
+    }
+
+ .bold {
+     font-weight: bold;
+ }
+
+.very-big-text {
+    font-size: 1.75em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.heart-center {
+    text-align: left
+}
+
+.spacer {
+    height: 10px;
+}
+
+.bigheart-style {
+    height: 250px;
+    width: 50% !important;
+}
+
+.label-style {
+    width: 60% !important;
+    border: 3px dashed #bcbcbc;
+}
+
+body * {
+    visibility: hidden;
+}
+
+#wrapper * {
+    visibility: visible;
+}
+
+

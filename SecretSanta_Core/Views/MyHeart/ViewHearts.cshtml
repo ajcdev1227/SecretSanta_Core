@@ -1,0 +1,63 @@
+﻿@model List<SecretSanta_Core.Models.DonorThankYousModel>
+@{
+    ViewData["Title"] = "View My Hearts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@functions
+{
+    public string GetImageUri(string name)
+    {
+        var imageUriBase = (string)ViewBag.ThankyouImageUriBase;
+        return $"{imageUriBase}/{name}";
+    }
+}
+
+
+<div>
+    <div class="fb-share-button" data-href="https://secretsantanow.org/AdoptHeart/AdoptFromHome" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsecretsantanow.org%2FAdoptHeart%2FAdoptFromHome&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+</div>
+@foreach (var mdl in Model)
+{
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="heart" style="height: 320px">
+            <div class="intro-message">
+                <div class="italicize big-heart-text">Secret Santa @mdl.Heart.DateEntered.Year</div>
+                <div class="md-heart-text">@mdl.Heart.NameAgeGenderString</div>
+                <div class="md-heart-text">@mdl.Heart.RecipientInfo</div>
+                <div class="sm-heart-text">First Wish: @mdl.Heart.FirstWishString</div>
+                <div class="sm-heart-text">Second Wish: @mdl.Heart.SecondWishString</div>
+                <div class="big-text bold">R#&nbsp;@mdl.Heart.RecipientNumber</div>
+            </div>
+        </div>
+    </div>
+
+    for (var i = 0; i < mdl.MessageThankYous.Count; i++)
+    {
+        <div class="d-flex justify-content-center align-items-center">
+            <div>
+                <i class="fa-solid fa-heart" style="color: red"></i>
+            </div>
+            <div>
+                <blockquote>
+                    <p>@Html.Raw(@mdl.MessageThankYous[i].Message)</p>
+                </blockquote>
+            </div>
+        </div>
+
+    }
+
+
+    for (var i = 0; i < mdl.ImageThankYous.Count; i += 3)
+    {
+        <div class="d-flex justify-content-center align-items-center">
+            @for (int j = i; j <= Math.Min(2 + i, mdl.ImageThankYous.Count - 1); j++)
+            {
+                <div>
+                    <img src="@GetImageUri(mdl.ImageThankYous[j].Image)" class="img-fluid" />
+                </div>
+            }
+        </div>
+
+    }
+
+}

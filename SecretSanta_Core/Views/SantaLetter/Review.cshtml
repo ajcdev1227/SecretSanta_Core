@@ -1,0 +1,204 @@
+﻿@model SecretSanta_Core.Models.ReviewModel
+@{
+    ViewData["Title"] = "Review Application";
+    Layout = "~/Views/Shared/_LayoutLetter.cshtml";
+}
+
+<h3>Thanks! This is the information you entered.  You can make changes now.</h3>
+<form id="review">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <input type="hidden" asp-for="LetterId"/>
+    <input type="hidden" id="Name" value="@ViewData["Name"]" />
+    <input type="hidden" id="Age" value="@ViewData["Age"]" />
+    <input type="hidden" id="Gender" value="@ViewData["Gender"]" />
+    <input type="hidden" id="WarmClothingSize" value="@ViewData["WarmClothingSize"]" />
+    <input type="hidden" id="WarmClothingSizeInfo" value="@ViewData["WarmClothingSizeInfo"]" />
+    <input type="hidden" id="Size" value="@ViewData["Size"]" />
+    <input type="hidden" id="ShoeSize" value="@ViewData["ShoeSize"]" />
+    <input type="hidden" id="Likes" value="@ViewData["Likes"]" />
+    <input type="hidden" id="OtherRequests" value="@ViewData["OtherRequests"]" />
+    <input type="hidden" id="FamilyMemberWarning" value="@ViewData["FamilyMemberWarning"]" />
+    <input type="hidden" id="FamilyCountWarning" value="@ViewData["FamilyCountWarning"]" />
+    <div>
+        <div><label asp-for="WriterName" class="col-form-label"></label></div>
+        <div>
+            <input asp-for="WriterName" class="form-control" maxlength="200" />
+            <span asp-validation-for="WriterName" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <div><label asp-for="Phone" class="col-form-label"></label></div>
+        <div>
+            <input asp-for="Phone" class="form-control phone" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <div><label asp-for="Email" class="col-form-label"></label></div>
+        <div>
+            <input asp-for="Email" class="form-control" maxlength="200" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <div><label asp-for="Agency" class="col-form-label"></label></div>
+        <div>
+            <input asp-for="Agency" class="form-control" maxlength="200" />
+            <span asp-validation-for="Agency" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div>Enter the name of the person you are writing a letter for.</div>
+    <div>
+        <div><label asp-for="FirstName" class="col-form-label"></label></div>
+        <div>
+            <input asp-for="FirstName" class="form-control" maxlength="100" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <div><label asp-for="LastName" class="col-form-label"></label></div>
+        <div>
+            <input asp-for="LastName" class="form-control" maxlength="100" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <div><label asp-for="Address" class="col-form-label"></label></div>
+        <div>
+            <input asp-for="Address" class="form-control" maxlength="250" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <div><label asp-for="City" class="col-form-label"></label></div>
+        <div>
+            <input asp-for="City" class="form-control" maxlength="100" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <div><label asp-for="Zip" class="col-form-label"></label></div>
+        <div>
+            <input asp-for="Zip" class="form-control" maxlength="10" />
+            <span asp-validation-for="Zip" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><label asp-for="NumChildrenUnder19" class="col-form-label"></label></div>
+        <div class="col-md-10"><input asp-for="NumChildrenUnder19" class="form-control"/></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><label asp-for="NumChildrenOver19" class="col-form-label"></label></div>
+        <div class="col-md-10"><input asp-for="NumChildrenOver19" class="form-control"/></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><label asp-for="NumParents" class="col-form-label"></label></div>
+        <div class="col-md-10"><input asp-for="NumParents" class="form-control"/></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><label asp-for="NumGrandparents" class="col-form-label"></label></div>
+        <div class="col-md-10"><input asp-for="NumGrandparents" class="form-control"/></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"><label asp-for="NumOtherFamily" class="col-form-label"></label></div>
+        <div class="col-md-10"><input asp-for="NumOtherFamily" class="form-control"/></div>
+    </div>
+    <div>
+        <div>
+            <label asp-for="Letter" class="col-form-label"></label>
+        </div>
+        <div>
+            <textarea asp-for="Letter" rows="30" class="form-control"></textarea>
+        </div>
+    </div>
+    <div>
+        <div class="pt-3">
+            <a href="#" id="addFamilyMember" class="btn btn-primary">Add Family Member</a>
+        </div>
+        <div id="familyMembers"></div>
+    </div>
+    <div class="offset-2 col-md-2 pt-3">
+        <button type="button" id="next" class="btn btn-primary">Next</button>
+    </div>
+</form>
+<div id="modalInfo" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>@ViewData["WarmClothingSizeInfo"]</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalWarning" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="errorMessage" class="text-danger"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalSuggestedAddress" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Please verify your address</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4>We suggest an address modification</h4>
+                <div id="suggested_address"></div>
+                <div id="suggested_city"></div>
+                <div id="suggested_zip"></div>
+                <div class="spacer-small"></div>
+                <div>
+                    <input type="radio" id="use_suggested" /><label for="use_suggested">&nbsp;&nbsp;Use this address</label>
+                </div>
+                <div>
+                    <input type="radio" id="use_original" /><label for="use_original">&nbsp;&nbsp;Use the address I entered</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="submit" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="notSonoma" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">This zip code in not in Sonoma County.  Please try again.</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <environment names="Development">
+        <script src="~/js/review.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/review.min.js"></script>
+    </environment>
+}

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SecretSanta_Core.Models.AgencyPickUpModel>
+@{
+    ViewData["Title"] = "Manage Pickup-Only Names";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>@ViewBag.Title.</h1>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <button type="button" id="add" class="btn btn-primary">Add New Pickup-Only Name</button>
+    </div>
+</div>
+<h4>Anyone listed as an Agency User can pick up already, do not add them again. Use this page to assign people to ONLY have "pick up" credentials. Be sure to instruct anyone picking up gifts to bring Identification.</h4>
+<div class="santalabel">@ViewBag.AgencyName</div>
+<input type="hidden" id="AgencyId" value="@ViewBag.AgencyId" />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteAgencyPickup", new { id = item.AgencyPickUpId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts{
+    <environment names="Development">
+        <script src="~/js/manageagencypickup.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/manageagencypickup.min.js"></script>
+    </environment>
+}

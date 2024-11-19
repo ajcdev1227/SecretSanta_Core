@@ -1,0 +1,103 @@
+﻿@model IEnumerable<SecretSanta_Core.Models.SponsorModel>
+@{
+    var pagesize = ViewBag.PageSize;
+    var count = ViewBag.Count;
+    var pageNumber = ViewBag.PageNumber;
+    ViewBag.Title = "Secret Santa Locations";
+}
+
+<h1>@ViewBag.Title</h1>
+<div class="float-end p-3">
+    <div class="d-flex">
+        <input id="zipCode" class="form-control me-1" type="search" placeholder="Search" aria-label="Search" value="@ViewBag.ZipCode">
+        <button id="search" type="button" class="btn btn-secondary">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+</div>
+@if (Model.Any())
+{
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SponsorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SponsorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(item.GoogleUrl))
+                    {
+                        <a href="@item.GoogleUrl" target="_blank">Get Directions</a>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <ul class="pagination">
+                @{ var c = (int)Math.Ceiling((double)count / (double)pagesize); }
+                @if (pageNumber > 1)
+                {
+                    <li class="page-item">
+                    <a class="page-link" href="@Url.Action("DropOffLocations", "LearnMore", new {id = (pageNumber - 1)})"><i class="fa-solid fa-chevron-left"></i></a>
+                    </li>
+                }
+                @for (int i = Math.Min(pageNumber, c < 6 ? 1 : c - 4); i < Math.Min(5 + pageNumber, c + 1); i++)
+                {
+
+                    if (i == pageNumber)
+                    {
+                        <li class="page-item active">
+                            <a class="page-link" href="#">@i.ToString()</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("DropOffLocations", "LearnMore", new {id = i})">@i.ToString()</a>
+                        </li>
+                    }
+
+                }
+                @if (pageNumber < c)
+                {
+                    <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Sponsors", "LearnMore", new {id = (pageNumber + 1)})"><i class="fa-solid fa-chevron-right"></i></a>
+                    </li>
+                }
+            </ul>
+
+        </div>
+}
+else
+{
+    <div>There are no drop off locations matching this criteria.</div>
+}
+@section Scripts
+{
+    <environment names="Development">
+        <script src="~/js/dropOffLocation.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/dropOffLocation.min.js"></script>
+    </environment>
+}
+
+
+
+

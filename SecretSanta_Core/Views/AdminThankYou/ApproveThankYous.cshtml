@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SecretSanta_Core.Data.TblDonorThankYou>
+@{
+    ViewData["Title"] = "Approve Thank Yous";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Approve Thank Yous</h1>
+
+<div id="table"></div>
+
+<div id="image" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Image From <span id="imageName"></span></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="thankYouImage"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="message" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Message From <span id="messageName"></span></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="thankYouId"/>
+                <textarea id="thankYouMessage" rows="10" class="form-control"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="save" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <environment names="Development">
+        <script src="~/js/approveThankYous.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/approveThankYous.min.js"></script>
+    </environment>
+}

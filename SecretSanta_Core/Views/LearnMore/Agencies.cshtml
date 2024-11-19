@@ -1,0 +1,28 @@
+﻿@model IEnumerable<SecretSanta_Core.Data.TblAgency>
+@{
+    ViewBag.Title = "Agencies";
+}
+
+<h1>@ViewBag.Title</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Agency Name</th>
+        <th>Agency Street</th>
+        <th>Agency City</th>
+        <th>Agency State</th>
+        <th>Agency Zip</th>
+    </tr>
+    @foreach (var am in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => am.AgencyName)</td>
+            <td>
+                @Html.DisplayFor(modelItem=>am.AgencyStreet)
+            </td>
+            <td>@Html.DisplayFor(modelItem =>am.AgencyCity)</td>
+            <td>@Html.DisplayFor(modelItem=>am.AgencyState)</td>
+            <td>@Html.DisplayFor(modelItem=>am.AgencyZip)</td>
+        </tr>
+    }
+</table>
+

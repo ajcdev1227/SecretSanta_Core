@@ -1,0 +1,64 @@
+﻿@using SecretSanta_Core.BusinessLogic
+@model SecretSanta_Core.Models.AdoptAHeartModel
+@{
+    ViewData["Title"] = "Print Heart";
+    Layout = "~/Views/Shared/_LayoutSimple.cshtml";
+}
+<h1>Print Heart</h1>
+<div>
+    <input type="hidden" id="barcodeVal" value="@Model.LabelNum" />
+    <input type="hidden" id="recipientNumber" value="@Model.RecipientNumber" />
+    <div class="container">
+        <div class='offset-10 col-md-2' id="divPrint" style='padding-bottom:10px'>
+            <button id="btnPrint" class="btn-secondary"><i class="fa-solid fa-print fa-2x" aria-hidden="true"></i></button>
+        </div>
+        <div style="clear:both"></div>
+        <div id="wrapper">
+            <div class="row">
+                <div class="bigheart col-md-6 col-sm-12">
+                    <div class="intro-message-lg heart-center">
+                        <h1 class="italicize">Secret Santa @Model.DateEntered.Year</h1>
+                        <div class="very-big-text">@Model.NameAgeGenderString</div>
+                        <div class="big-text">@Model.RecipientInfo</div>
+                        <div class="md-text">1st Wish: @Model.FirstWishString</div>
+                        <div class="md-text">2nd Wish: @Model.SecondWishString</div>
+                        <div class="very-big-text">R#&nbsp;@Model.RecipientNumber</div>
+                    </div>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <div>
+                <div class="label-style">
+                    <div>Recipient Number @Model.RecipientNumber</div>
+                    <div class="center">
+                        <div><span class="bold big-text">@Model.Name</span>&nbsp;&nbsp;<span>Age:@Model.Age</span>&nbsp;&nbsp;<span class="bold very-big-text">@Model.AgencyCode&nbsp;</span><span class="big-text">@Model.Location</span></div>
+                        <div><span class="md-text bold">Label</span>&nbsp;&nbsp;<span class="very-big-text">@Model.LabelNum</span></div>
+                    </div>
+                    <div id="barcode"></div>
+                    <div style="float: left">Printed @BusinessMethods.GetLocalDateTime(DateTime.UtcNow).ToShortDateString()</div>
+                    <div style="float: right">Gift 1 of _____</div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+            <div style="height: 20px"></div>
+            <p class="bold">Thank you for adopting this heart.</p>
+            <p>Gifts should be dropped off at sponsor locations or mailed to CVNL Secret Santa, 153 Stony Circle, Suite 100, Santa Rosa, CA 95401 by <span class="bold">@ViewBag.GiftDueDate</span> Please include a print-out of the label below, or note of the label number, with your gift card so that we can deliver it to the correct recipient.</p>
+            <p>If you are unable to fulfill this wish by the <span class="bold">@ViewBag.GiftDueDate</span> deadline, please let us know by emailing <a href="mailto:@ViewBag.EmailTo">@ViewBag.EmailTo</a>. Include the label number in your email.</p>
+            <p>Thank you.</p>
+        </div>
+        <div class="spacer"></div>
+        <h3><a href="@Url.Action("Index", "Home")" class="alink">Back to Secret Santa</a></h3>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script src="~/jquery-barcode/jquery-barcode.min.js"></script>
+    <environment names="Development">
+        <script src="~/js/adoptheartprint.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/adoptheartprint.min.js"></script>
+    </environment>
+}
+

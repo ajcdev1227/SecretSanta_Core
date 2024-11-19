@@ -1,0 +1,88 @@
+﻿@model SecretSanta_Core.Models.AdoptAHeartModel?
+@{
+	ViewData["Title"] = "Adopt Heart";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	int pgPage = ViewBag.Page;
+}
+
+<h1>Adopt This Heart</h1>
+@if (Model != null)
+{
+	<input type="hidden" id="recipientNumber" value="@Model.RecipientNumber" />
+	<div class="row">
+		<div class="bigheart col-md-6 col-sm-12">
+			<div class="intro-message-lg heart-center">
+				<h1 class="italicize">Secret Santa @Model.DateEntered.Year</h1>
+				<div class="very-big-text">@Model.NameAgeGenderString</div>
+				<div class="big-text">@Model.RecipientInfo</div>
+				<div class="md-text">1st Wish: @Model.FirstWishString</div>
+				<div class="md-text">2nd Wish: @Model.SecondWishString</div>
+				<div class="very-big-text">R#&nbsp;@Model.RecipientNumber</div>
+			</div>
+		</div>
+	</div>
+	<form asp-action="AdoptHeart" role="form" id="info">
+		<input type="hidden" id="gender" value="@ViewBag.Gender" />
+		<input type="hidden" id="age" Value="@ViewBag.AgeGroup" />
+		<input type="hidden" id="giftType" value="@ViewBag.GiftType" />
+		<div class="row">
+			<p>To adopt this heart and fulfill this holiday wish, please either fund a gift now with a donation to the Secret Santa program or drop off your wrapped gift to a sponsor location.</p>
+			<p>Secret Santa will not share your email. Secret Santa will use your email to send you a thank you and <u>one</u> reminder next year (and following years) to consider adopting another heart or letter.</p>
+
+			<div class="d-flex justify-content-center align-items-center">
+				<div class="btn-group" id="radioBtn">
+					<a class="btn btn-primary btn-lg notActive" data-toggle="GiftMethod" data-title="Donate">Fund this heart now</a>
+					<a class="btn btn-primary btn-lg notActive" data-toggle="GiftMethod" data-title="Gift">Print the heart and deliver a gift</a>
+				</div>
+				<input type="hidden" asp-for="GiftMethod" />
+			</div>
+		</div>
+
+		<div class="row mb-3 mt-3" id="information">
+			<input type="hidden" asp-for="RecipientNumber" />
+			<div id="errorMessage" class="text-danger"></div>
+			<div class="row mb-3">
+				<div class="col-md-2">
+					<label asp-for="Donor.Email" class="col-form-label"></label>
+				</div>
+				<div class="col-md-10">
+					<input asp-for="Donor.Email" class="form-control" id="donorEmail" required />
+					<span asp-validation-for="Donor.Email" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<label asp-for="Donor.ConfirmEmail" class="col-form-label"></label>
+				</div>
+				<div class="col-md-10">
+					<input asp-for="Donor.ConfirmEmail" id="confirm_donorEmail" class="form-control" required />
+					<span asp-validation-for="Donor.ConfirmEmail" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<button id="btnSubmit" type="button" class="col-md-2 btn btn-lg btn-primary" disabled>Submit</button>
+		</div>
+		<div id="adopted" style="display: none" class="text-danger">
+			<h2>This heart has already been adopted.  Please choose another to fulfill someone's holiday wish.</h2>
+		</div>
+	</form>
+}
+else
+{
+	<h2 class="text-danger">No such heart</h2>
+}
+
+<a id="back" class="nav-link">Back to List</a>
+
+@section Scripts
+{
+	<environment names="Development">
+		<script src="~/js/adoptheartmain.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/adoptheartmain.min.js"></script>
+	</environment>
+}
+

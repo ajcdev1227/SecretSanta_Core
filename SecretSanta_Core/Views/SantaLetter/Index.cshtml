@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Letter to Secret Santa";
+    Layout = "~/Views/Shared/_LayoutLetter.cshtml";
+}
+
+<h1>Hello and Welcome to "Letter to Secret Santa".</h1>
+<div>
+    <p>Use this page to write a letter to Secret Santa. Secret Santa fulfills wishes two different ways, we read the letter on air at KZST and post them online for the public to adopt.</p>
+    <p>Before beginning, please take a moment to read the following, and then click "I Accept" at the bottom and click "Next" if you wish to proceed.</p>
+    <div class="italicize">
+        <p>The names of individuals are confidential, however their stories are not kept confidential.    Any information I provide may be used by the <a href="https://www.CVNL.org/" target="_blank">Center for Volunteers & Nonprofit Leadership</a>, <a href="http://www.kzst.com/" target="_blank" />KZST radio</a> or <a href="https://www.friedmanshome.com/" target="_blank">Friedman's Home Improvement Center</a>, other partnering agencies as well as members of our community. My letter might be read on the air or published in part or in full for marketing purposes.</p>
+        <p>I understand that completing this application does not guarantee the receiving of any gifts or food vouchers, and the quality and quantity of the gifts is dependent upon the generosity of donors. I agree to pick up gifts if I am granted or forfeit following year.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3><label><input id="disclaimer" type="checkbox" />&nbsp;I Accept</label></h3>
+        </div>
+        <div class="col-md-8">
+            <input type="button" id="next" value="Next" style="display:none;margin-top:10px;" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <environment names="Development">
+        <script src="~/js/santaletterindex.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/santaletterindex.min.js"></script>
+    </environment>
+}

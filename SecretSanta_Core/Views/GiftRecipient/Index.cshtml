@@ -1,0 +1,110 @@
+﻿@model SecretSanta_Core.Models.DashboardModel
+
+@{
+	ViewBag.Title = "View Heart Wishes";
+}
+
+
+<div class="row">
+	<div class="col-md-6">
+		<h2>View Heart Wishes</h2>
+	</div>
+	<div class="col-md-6 d-flex justify-content-center align-items-center">
+		<input type="button" value="Add A Heart Wish" id="add" class="btn btn-primary" />
+	</div>
+</div>
+<div class="santalabel">@ViewBag.AgencyName</div>
+<div class="spacer-small"></div>
+<input type="hidden" id="attentionVal" value="@((bool)ViewBag.Attention? 1: 0)" />
+<input type="hidden" id="agencyId" value="@ViewBag.AgencyId" />
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Recipient View</a></li>
+		<li><a href="#tabs-2">Gift View</a></li>
+	</ul>
+	<div id="tabs-1">
+		@if ((bool)ViewBag.Attention)
+		{
+			<div class="row">
+				<div class="col-md-3">
+					<input class="flashbutton" id="attention" type="button" value="Records Need Attention" />
+				</div>
+				<div class="col-md-9 info-button">
+					<a id="btnInfo" class="info btn" title="Records needing  attention are DRAFT and EDIT.">
+						<i class="fa fa-info-circle"></i>
+					</a>
+				</div>
+			</div>
+			<div class="spacer-small"></div>
+		}
+		<div class="row">
+			<div class="col-md-2">
+				<div class="spacer-small"></div>
+				<div><label><input class="chkDashboard" type="checkbox" value="0" id="draft" />&nbsp;Draft&nbsp;@Model.NumDraft</label></div>
+				<div><label><input class="chkDashboard" type="checkbox" value="1" id="new" />&nbsp;New&nbsp;@Model.NumNew</label></div>
+				<div><label><input class="chkDashboard" type="checkbox" value="2" id="approved" />&nbsp;Approved&nbsp;@Model.NumApproved</label></div>
+				<div><label><input class="chkDashboard" type="checkbox" value="3" id="revise" />&nbsp;Revise&nbsp;@Model.NumRevise</label></div>
+				<div><label><input class="chkDashboard" type="checkbox" value="4" id="ractive" />&nbsp;Active&nbsp;@Model.NumActive</label></div>
+				<div><label><input class="chkDashboard" type="checkbox" value="-1" id="inactive" />&nbsp;Inactive&nbsp;@Model.NumInActive</label></div>
+				<div><label><input class="chkDashboard" type="checkbox" value="5" id="rcancel" />&nbsp;Cancel&nbsp;@Model.NumRecipientCancel</label></div>
+				<div><label><input class="chkDashboard" type="checkbox" value="14" id="rother" />&nbsp;Other @Model.NumRecipientOther</label></div>
+			</div>
+			<div class="col-md-10">
+				<div class="table-responsive">
+					<div id="table" class="table">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="tabs-2">
+		<div class="d-flex">
+			<div class="col-md-2">
+				<div class="spacer-small"></div>
+				<div><label><input class="chkGift" type="checkbox" value="15" id="pending" />&nbsp;Pending&nbsp;@Model.NumPending</label></div>
+				<div><label><input class="chkGift" type="checkbox" value="5" id="cancel" />&nbsp;Cancel&nbsp;@Model.NumCancel</label></div>
+				<div><label><input class="chkGift" type="checkbox" value="7" id="webadopt" />&nbsp;Web Adopt&nbsp;@Model.NumWebAdopt</label></div>
+				<div><label><input class="chkGift" type="checkbox" value="8" id="in" />&nbsp;In&nbsp;@Model.NumIn</label></div>
+				<div><label><input class="chkGift" type="checkbox" value="9" id="inbike" />&nbsp;In Bike&nbsp;@Model.NumInBike</label></div>
+				<div><label><input class="chkGift" type="checkbox" value="10" id="ingifcard" />&nbsp;In GifCard&nbsp;@Model.NumInGifCard</label></div>
+				<div><label><input class="chkGift" type="checkbox" value="11" id="out" />&nbsp;Out&nbsp;@Model.NumOut</label></div>
+				<div><label><input class="chkGift" type="checkbox" value="12" id="outbike" />&nbsp;Out Bike&nbsp;@Model.NumOutBike</label></div>
+				<div><label><input class="chkGift" type="checkbox" value="13" id="outgftcard" />&nbsp;Out GfCard&nbsp;@Model.NumOutGfCard</label></div>
+				<div><label><input class="chkGift" type="checkbox" value="14" id="other" />&nbsp;Other&nbsp;@Model.NumOther</label></div>
+			</div>
+			<div class="col-md-10">
+				<div class="table-responsive">
+					<div id="giftTable" class="table">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modalInfo" class="modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<span>Records needing  attention are DRAFT and EDIT.</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+@section Scripts {
+	<environment names="Development">
+		<script src="~/js/dashboard.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/dashboard.min.js"></script>
+	</environment>
+}
+

@@ -1,0 +1,80 @@
+﻿@model SecretSanta_Core.Models.AdoptLetterModel
+@{
+    ViewData["Title"] = "Letter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="float-end">
+    <a href="@Url.Action("Print")" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-print fa-2x" aria-hidden="true"></i></a>
+</div>
+<h1>Letter # @Model.LetterId @Model.LetterSummary</h1>
+<div class="spacer"></div>
+<div class="col-md-9 letter">
+    <div class="letter-msg">
+        @Html.Raw(Model.Letter)
+    </div>
+    <div class="family-msg">
+        <div class="md-heart-text">Family Members</div>
+        @foreach (var m in Model.FamilyMembers)
+        {
+            <div class="sm-heart-text">@m.InfoString</div>
+        }
+    </div>
+</div>
+<form id="info" asp-action="Letter">
+    <div>
+        <p>To adopt this letter please either fund a gift now with a donation and we will do the shopping or drop off your wrapped gift to a sponsor location.</p>
+        <p>Secret Santa will not share your email. Secret Santa will use your email to send you a thank you and <u>one</u> reminder next year (and following years) to consider adopting another heart or letter.</p>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="btn-group" id="radioBtn">
+                    <a class="btn btn-primary btn-lg notActive" data-toggle="GiftMethod" data-title="Donate">Fund this letter now</a>
+                    <a class="btn btn-primary btn-lg notActive" data-toggle="GiftMethod" data-title="Gift">Send a Gift</a>
+                </div>
+                <input type="hidden" asp-for="GiftMethod" />
+        </div>
+    </div>
+    <div id="information" style="display: none">
+        <div class="spacer"></div>
+        <p>
+            Thank you for adopting this letter. Please enter your name and best phone number to be reached and your email. Your identity will not be revealed to the recipient of your gift. Feel free to contact Secret Santa anytime with questions by email at <a href="mailto:@ViewBag.ContactEmail">Email @ViewBag.ContactEmail</a>
+        </p>
+        <input type="hidden" asp-for="LetterId"/>
+        <div id="errorMessage" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-2"><label asp-for="AdoptedBy"class="col-form-label"></label></div>
+            <div class="col-md-10"><input asp-for="AdoptedBy" class="form-control" />
+                <span asp-validation-for="AdoptedBy" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"><label asp-for="AdoptedByPhone"class="col-form-label"></label></div>
+            <div class="col-md-10"><input asp-for="AdoptedByPhone" class="form-control phone" />
+                <span asp-validation-for="AdoptedByPhone" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"><label asp-for="AdoptedByEmail"class="col-form-label"></label></div>
+            <div class="col-md-10"><input asp-for="AdoptedByEmail" class="form-control" />
+                <span asp-validation-for="AdoptedByEmail" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2"><label asp-for="ConfirmEmail"class="col-form-label"></label></div>
+            <div class="col-md-10"><input asp-for="ConfirmEmail" class="form-control" />
+                <span asp-validation-for="ConfirmEmail" class="text-danger"></span>
+            </div>
+        </div>
+            <p>Thank you for adopting this letter, check your email for confirmation.</p>
+        <button id="btnSubmit" type="button" class="w-100 btn btn-lg btn-primary">Submit</button>
+        </div>
+</form>
+@section Scripts
+{
+    <environment names="Development">
+        <script src="~/js/adoptletter.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/adoptletter.min.js"></script>
+    </environment>
+}

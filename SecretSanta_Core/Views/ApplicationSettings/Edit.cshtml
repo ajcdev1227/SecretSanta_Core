@@ -1,0 +1,37 @@
+﻿@model SecretSanta_Core.Models.SettingModel
+
+@{
+    ViewData["Title"] = "Edit Application Setting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit Application Setting</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SettingsID"/>
+            <div>
+                <label asp-for="SettingsName" class="col-form-label"></label>
+                <input asp-for="SettingsName" class="form-control" />
+                <span asp-validation-for="SettingsName" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="SettingsValue" class="col-form-label"></label>
+                <input asp-for="SettingsValue" class="form-control" />
+                <span asp-validation-for="SettingsValue" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+

@@ -1,0 +1,80 @@
+﻿@model SecretSanta_Core.Models.PaymentModel
+@{
+	ViewData["Title"] = "Donate";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Donate to Fund Your Heart</h1>
+
+<div class="payment">
+
+	<div class="row mb-3 g-5">
+		<div class="col-md-3 col-lg-3 col-xl-2 col-sm-6">
+			<div class="input-group hidden" id="custom-amount-group">
+				<span class="input-group-text">$</span>
+				<input id="custom-amount" name="custom-amount" class="form-control" placeholder="50.00" aria-label="custom-amount">
+			</div>
+		</div>
+	</div>
+
+	<div class="row mb-3 g-1">
+		<div class="col-md-2 col-lg-1 col-sm-4">
+			<button type="button" name="btn-custom-amount" data-amount="50.00" class="btn btn-light btn-sm">$50.00</button>
+		</div>
+		<div class="col-md-2 col-lg-1 col-sm-4">
+			<button type="button" name="btn-custom-amount" data-amount="75.00" class="btn btn-light btn-sm">$75.00</button>
+		</div>
+		<div class="col-md-2 col-lg-1 col-sm-4">
+			<button type="button" name="btn-custom-amount" data-amount="100.00" class="btn btn-light btn-sm">$100.00</button>
+		</div>
+		<div class="col-md-2 col-lg-1 col-sm-6">
+			<button type="button" name="btn-custom-amount" data-amount="150.00" class="btn btn-light btn-sm">$150.00</button>
+		</div>
+		<div class="col-md-3 col-lg-2 col-sm-6">
+			<button type="button" name="btn-custom-amount" class="btn btn-light btn-sm">Custom Amount</button>
+		</div>
+	</div>
+
+	<form asp-action="Payment" method="post" id="payment-form">
+		<input type="hidden" id="amt" value=@ViewBag.Amount>
+		<input type="hidden" asp-for="StripePublishableKey" />
+		<div class="group" id="card-element">
+			<label>
+				<span>Amount</span>
+				<input id="Amount" name="Amount" class="field" />
+			</label>
+			<label>
+				<span>Card number</span>
+				<div id="card-number-element" class="field"></div>
+			</label>
+			<label>
+				<span>Expiry date</span>
+				<div id="card-expiry-element" class="field"></div>
+			</label>
+			<label>
+				<span>CVC</span>
+				<div id="card-cvc-element" class="field"></div>
+			</label>
+			<label>
+				<span>Postal code</span>
+				<input id="postal-code" name="postal_code" class="field" />
+			</label>
+		</div>
+		<button type="submit" id="submitButton" class="btn btn-primary">Donate</button>
+		<div class="outcome">
+			<div class="error"></div>
+		</div>
+	</form>
+</div>
+
+@section Scripts
+{
+	<script src="~/jquery-maskmoney/jquery.maskmoney.min.js"></script>
+	<script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+	<environment names="Development">
+		<script src="~/js/payment.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/payment.min.js"></script>
+	</environment>
+}

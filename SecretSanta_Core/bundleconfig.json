@@ -1,0 +1,306 @@
+[
+  {
+    "outputFileName": "wwwroot/ckeditor/ckeditor.min.js",
+    "inputFiles": [
+      "wwwroot/ckeditor/ckeditor.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/ckeditor/config.min.js",
+    "inputFiles": [
+      "wwwroot/ckeditor/config.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/ckeditor/contents.min.css",
+    "inputFiles": [
+      "wwwroot/ckeditor/contents.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/ckeditor/styles.min.js",
+    "inputFiles": [
+      "wwwroot/ckeditor/styles.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/print.min.css",
+    "inputFiles": [
+      "wwwroot/css/print.css"
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/font-awesome/css/all.min.css",
+    "inputFiles": [
+      "wwwroot/font-awesome/css/all.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/font-awesome/js/all.min.js",
+    "inputFiles": [
+      "wwwroot/font-awesome/js/all.js"
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/js/addFamilyMember.min.js",
+    "inputFiles": [
+      "wwwroot/js/addFamilyMember.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/addgift.min.js",
+    "inputFiles": [
+      "wwwroot/js/addgift.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/adoptFromHome.min.js",
+    "inputFiles": [
+      "wwwroot/js/adoptFromHome.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/adoptheartmain.min.js",
+    "inputFiles": [
+      "wwwroot/js/adoptheartmain.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/adoptheartprint.min.js",
+    "inputFiles": [
+      "wwwroot/js/adoptheartprint.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/adoptletter.min.js",
+    "inputFiles": [
+      "wwwroot/js/adoptletter.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/applicationsettings.min.js",
+    "inputFiles": [
+      "wwwroot/js/applicationsettings.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/approveThankYous.min.js",
+    "inputFiles": [
+      "wwwroot/js/approveThankYous.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/chart.min.js",
+    "inputFiles": [
+      "wwwroot/js/chart.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dashboard.min.js",
+    "inputFiles": [
+      "wwwroot/js/dashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/disclaimer.min.js",
+    "inputFiles": [
+      "wwwroot/js/disclaimer.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dropOffLocation.min.js",
+    "inputFiles": [
+      "wwwroot/js/dropOffLocation.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/editAdminEmail.min.js",
+    "inputFiles": [
+      "wwwroot/js/editAdminEmail.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/editgift.min.js",
+    "inputFiles": [
+      "wwwroot/js/editgift.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/editstory.min.js",
+    "inputFiles": [
+      "wwwroot/js/editstory.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/familyinfo.min.js",
+    "inputFiles": [
+      "wwwroot/js/familyinfo.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/familymembers.min.js",
+    "inputFiles": [
+      "wwwroot/js/familymembers.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/forwho.min.js",
+    "inputFiles": [
+      "wwwroot/js/forwho.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/home.min.js",
+    "inputFiles": [
+      "wwwroot/js/home.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/info.min.js",
+    "inputFiles": [
+      "wwwroot/js/info.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/letterinfo.min.js",
+    "inputFiles": [
+      "wwwroot/js/letterinfo.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/manageagencypickup.min.js",
+    "inputFiles": [
+      "wwwroot/js/manageagencypickup.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/managethankyou.min.js",
+    "inputFiles": [
+      "wwwroot/js/managethankyou.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/message.min.js",
+    "inputFiles": [
+      "wwwroot/js/message.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/payment.min.js",
+    "inputFiles": [
+      "wwwroot/js/payment.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/print.min.js",
+    "inputFiles": [
+      "wwwroot/js/print.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/printmorelabels.min.js",
+    "inputFiles": [
+      "wwwroot/js/printmorelabels.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/printmorelabels.min.js",
+    "inputFiles": [
+      "wwwroot/js/printmorelabels.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/register.min.js",
+    "inputFiles": [
+      "wwwroot/js/register.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/registerheart.min.js",
+    "inputFiles": [
+      "wwwroot/js/registerheart.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/resetforgottenpassword.min.js",
+    "inputFiles": [
+      "wwwroot/js/resetforgottenpassword.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/review.min.js",
+    "inputFiles": [
+      "wwwroot/js/review.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/santaletterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/santaletterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/storyindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/storyindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/writerinfo.min.js",
+    "inputFiles": [
+      "wwwroot/js/writerinfo.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/addimage.min.js",
+    "inputFiles": [
+      "wwwroot/js/addimage.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+
+  {
+    "outputFileName": "wwwroot/js/AdoptLetter/payment.min.js",
+    "inputFiles": [
+      "wwwroot/js/AdoptLetter/payment.js"
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/js/AgencyUser/AgencyContacts.min.js",
+    "inputFiles": [
+      "wwwroot/js/AgencyUser/AgencyContacts.js"
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/js/AgencyUser/AllAgencyContacts.min.js",
+    "inputFiles": [
+      "wwwroot/js/AgencyUser/AllAgencyContacts.js"
+    ]
+  }
+
+]

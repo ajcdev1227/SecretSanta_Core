@@ -1,0 +1,133 @@
+﻿@model SecretSanta_Core.Models.HomeModel
+@{
+	ViewBag.Title = "Sonoma County's Secret Santa";
+}
+
+<div class="box">
+	<div class="home-img"></div>
+	<div class="top-overlay"></div>
+	<div class="overlay-text">
+		<div class="home-title text-center">Secret Santa</div>
+		<div class="sub-title" style="padding:1%">
+			Thank you Sonoma County for your incredible support!
+		</div>
+	</div>
+	<div class="bottom-overlay"></div>
+	<div class="bottom-text">
+		<div class="bottom-left text-center">
+			<div class="image-icon">
+				<i aria-hidden="true" class="fa fa-envelope fa-2x"></i>
+			</div>
+			<div class="sub-title" style="padding: 3%; font-weight:600">Adopt a Heart</div>
+			<p style="color: white; padding: 2%; font-weight:600">Select a Heart Wish Online</p>
+			<div class="bottom-div">
+				<button type="button" id="adopt" class="btn-lg btn-custom">Adopt</button>
+			</div>
+		</div>
+		<div class="bottom-middle-left text-center">
+			<div class="image-icon">
+				<i aria-hidden="true" class="fa fa-donate fa-2x"></i>
+			</div>
+			<div class="sub-title" style="padding: 3%; font-weight:600">Donate</div>
+			<p style="color: white; padding: 2%; font-weight:600">Donate to fulfill wishes.</p>
+			<div class="bottom-div">
+				<button type="button" id="donate" class="btn-lg btn-custom">Donate</button>
+			</div>
+		</div>
+		<div class="bottom-middle-right text-center">
+			<div class="image-icon">
+				<i aria-hidden="true" class="fa fa-heart fa-2x"></i>
+			</div>
+			<div class="sub-title" style="padding: 3%; font-weight:600">Sponsor</div>
+			<p style="color: white; padding: 2%; font-weight:600">We invite you to join CVNL and our partners as a sponsor.</p>
+			<div style="padding:2%">
+				<button type="button" id="sponsor" class="btn-lg btn-custom">Sponsor</button>
+			</div>
+		</div>
+		<div class="bottom-right text-center">
+			<div class="image-icon">
+				<i aria-hidden="true" class="fa fa-handshake fa-2x"></i>
+			</div>
+			<div class="sub-title" style="padding: 3%; font-weight:600">Volunteer</div>
+			<p style="color: white; padding: 2%; font-weight:600">Sign up to volunteer.</p>
+			<div class="bottom-div">
+				<button type="button" id="server" class="btn-lg btn-custom">Serve</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section class="mb-5">
+	<h3 class="text-red-lg text-center">@ViewBag.HomeText</h3>
+	<div class="d-flex justify-content-center align-items-center">
+		<img src="@ViewBag.HomeImageUrl" class="img-fluid" />
+	</div>
+</section>
+
+<section class="mb-5">
+	<div class="flex-wrap-container">
+		<div class="testimonial-left">
+			<img src="~/images/Bikes.jpg" class="img-fluid" />
+		</div>
+		<div class="testimonial-right">
+			<div class="testimonial-title">Testimonials</div>
+			<div id="quote-carousel" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="6000">
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
+					@for (int i = 1; i < Model.Stories.Count; i++)
+					{
+						<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" aria-label="Slide @i"></button>
+					}
+				</div>
+				<div class="carousel-inner">
+					<div class="carousel-item active carousel-slide">
+						<div class="text-center">
+							<div class="testimonal-text">
+								@Html.Raw(Model.Stories.First().StoryContent)
+							</div>
+						</div>
+						<div>
+							<div class="text-center">
+								<img src="~/images/Home/gift.jpg" alt="@Model.Stories.First().Title" class="rounded testimonial-image">
+								<cite class="testimonial-name"><span class="testimonial-name">@Model.Stories.First().Title</span></cite>
+							</div>
+						</div>
+					</div>
+					@for (int i = 1; i < Model.Stories.Count; i++)
+					{
+
+						<div class="carousel-item carousel-slide">
+							<div class="text-center">
+								<div class="testimonal-text">
+									@Html.Raw(Model.Stories[i].StoryContent)
+								</div>
+							</div>
+							<div>
+								<div class="text-center">
+
+									<img src="~/images/Home/gift.jpg" alt="@Model.Stories[i].Title" class="rounded testimonial-image">
+									<cite class="testimonial-name"><span class="testimonial-name">@Model.Stories[i].Title</span></cite>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section>
+	<div class="d-flex justify-content-center align-items-center">
+		<img src="@ViewBag.SponsorImageUrl" class="img-fluid" />
+	</div>
+</section>
+
+@section scripts {
+	<environment names="Development">
+		<script src="~/js/home.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/home.min.js"></script>
+	</environment>
+}

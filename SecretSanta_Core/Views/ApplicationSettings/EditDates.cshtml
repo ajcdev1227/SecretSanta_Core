@@ -1,0 +1,39 @@
+﻿@model SecretSanta_Core.Models.Dates
+
+@{
+    ViewData["Title"] = "Edit Heart Central Dates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit Heart Central Dates</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="EditDates">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Category"/>
+            <div>
+                <label asp-for="TheseDates.StartDate" class="col-form-label"></label>
+                <input asp-for="TheseDates.StartDate" class="form-control" />
+                <span asp-validation-for="TheseDates.StartDate" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="TheseDates.EndDate" class="col-form-label"></label>
+                <input asp-for="TheseDates.EndDate" class="form-control" />
+                <span asp-validation-for="TheseDates.EndDate" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+

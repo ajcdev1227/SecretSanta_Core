@@ -1,0 +1,55 @@
+﻿@{
+	ViewData["Title"] = "MULTIPLE GIFT INSTRUCTIONS";
+	Layout = "~/Views/Shared/_LayoutSimple.cshtml";
+}
+
+<input type="hidden" id="now" value="@ViewBag.Now" />
+<div class="d-flex" id="hdr">
+	<div class="w-50">
+		<h1>MULTIPLE GIFT INSTRUCTIONS</h1>
+	</div>
+	<div class="w-50">
+		<button id="btnPrint" class="btn-secondary"><i class="fa-solid fa-print fa-2x" aria-hidden="true"></i></button>
+	</div>
+</div>
+<div id="wrapper"></div>
+<h3><a href="@Url.Action("Index", "Home")" class="alink">Back to Secret Santa</a></h3>
+<div id="modalLabels" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">MULTIPLE GIFT INSTRUCTIONS</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<p style="text-align:justify">
+						Instructions;  If gifts are bundled together, be sure to use sufficient tape, not string since they may come apart during handling.  If you use a bag, be sure to tape the bag shut and put the label on the outside.   If you bought separate gifts, gift wrapped separate, and not bundled together place a label on each gift.   
+					</p>
+				</div>
+				<div class="row">
+					<label for="numberGifts">How many additional labels do you need?</label>
+					<input type="text" id="numberGifts" class="form-control" />
+				</div>
+				<div class="row">
+					<label for="heartNumber">Enter Recipient Number or Label Number</label>
+					<input type="text" id="heartNumber" class="form-control" />
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="printLabels" disabled>Print Labels</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<environment names="Development">
+		<script src="~/js/printmorelabels.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/printmorelabels.min.js"></script>
+	</environment>
+	<script src="~/jquery-barcode/jquery-barcode.min.js"></script>
+}

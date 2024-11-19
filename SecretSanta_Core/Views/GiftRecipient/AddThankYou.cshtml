@@ -1,0 +1,25 @@
+﻿@model SecretSanta_Core.Models.DonorThankYouModel
+@{
+    ViewData["Title"] = "Add Thank You";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add Thank You</h1>
+<form asp-action="AddThankYou" enctype="multipart/form-data">
+    <input type="hidden" asp-for="RecipientNum"/>
+    <div class="mb-3">
+        <div>
+            <label class="col-form-label">Upload (only image)</label>
+        </div>
+        <div>
+            <input type="file" asp-for="FormFiles"/>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="col-form-label" asp-for="Message"></div>
+        <div>
+            <textarea asp-for="Message" class="form-control"></textarea>
+        </div>
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary" />
+</form>

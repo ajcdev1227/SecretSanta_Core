@@ -1,0 +1,39 @@
+﻿@model SecretSanta_Core.Models.AdminEmailModel
+
+@{
+    ViewData["Title"] = "Edit Admin Email";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit Admin Email</h1>
+
+<form asp-action="EditAdminEmail">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="EmailId" />
+    <div>
+        <textarea asp-for="EmailContent" class="form-control"></textarea>
+        <span asp-validation-for="EmailContent" class="text-danger"></span>
+    </div>
+    <div class="my-3">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section scripts{
+    <environment names="Development">
+        <script src="~/ckeditor/ckeditor.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/ckeditor/ckeditor.min.js"></script>
+    </environment>
+    <script>
+        $(function () {
+            CKEDITOR.replace('EmailContent');
+        });
+    </script>
+}
+

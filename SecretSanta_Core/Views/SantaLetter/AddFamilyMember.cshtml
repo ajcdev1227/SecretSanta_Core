@@ -1,0 +1,128 @@
+﻿@model SecretSanta_Core.Models.FamilyMemberModel
+@{
+    ViewData["Title"] = "AddFamilyMember";
+    Layout = "~/Views/Shared/_LayoutLetter.cshtml";
+}
+
+<form id="addfamily" asp-action="AddFamilyMember">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <input type="hidden" asp-for="LetterId" />
+    <div class="row">
+        <div class="col">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" maxlength="200" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="Age" class="form-label"></label>
+            <div class="input-group">
+                <input asp-for="Age" class="form-control" max="200" required />
+                <select asp-for="AgeType" class="form-select" required>
+                    <option value="years">years</option>
+                    <option value="months">months</option>
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <div><label asp-for="Gender" class="form-label"></label></div>
+            <div>
+                <select asp-for="Gender" class="form-select" required>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                    <option value="NB">Non Binary</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <label asp-for="WarmClothingSize" class="form-label"></label>
+            <div class="row">
+                <div class="col position-relative">
+                    <input asp-for="WarmClothingSize" class="form-control" maxlength="25" required />
+                    <span asp-validation-for="WarmClothingSize" class="text-danger"></span>
+                    <a id="btninfo" class="info position-absolute" style="right: 20px; top: 8px;">
+                        <i class="fa-solid fa-info-circle"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <select asp-for="WarmClothingType" class="form-select" required>
+                        <option value="">Select</option>
+                        <option value="Boys">Boys</option>
+                        <option value="Girls">Girls</option>
+                        <option value="Mens">Mens</option>
+                        <option value="Mens">Womens</option>
+                    </select>
+                    <span asp-validation-for="WarmClothingType" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col">
+            <label asp-for="ShoeSize" class="form-label"></label>
+            <div class="row">
+                <div class="col">
+                    <input asp-for="ShoeSize" class="form-control" maxlength="200" required />
+                    <span asp-validation-for="ShoeSize" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <select asp-for="ShoeSizeType" class="form-select" required>
+                        <option value="">Select</option>
+                        <option value="Boys">Boys</option>
+                        <option value="Girls">Girls</option>
+                        <option value="Mens">Mens</option>
+                        <option value="Womens">Womens</option>
+                    </select>
+                    <span asp-validation-for="ShoeSizeType" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div><label asp-for="Likes" class="col-form-label"></label></div>
+        <div>
+            <textarea asp-for="Likes" class="form-control" rows="10" required></textarea>
+            <span asp-validation-for="Likes" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <div><label asp-for="OtherRequests" class="col-form-label"></label></div>
+        <div>
+            <textarea asp-for="OtherRequests" class="form-control" rows="10" required></textarea>
+            <span asp-validation-for="OtherRequests" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-2 pt-3">
+        <button type="submit" id="add" class="btn btn-primary" disabled>Add</button>
+    </div>
+</form>
+<div>
+    <a asp-action="FamilyMembers" asp-route-id="@Model.LetterId">Back</a>
+</div>
+<div id="modalInfo" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Enter a number or a size like med. Be sure to select the next field also.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <environment names="Development">
+        <script src="~/js/addFamilyMember.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/addFamilyMember.min.js"></script>
+    </environment>
+}
+

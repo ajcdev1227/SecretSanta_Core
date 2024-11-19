@@ -1,0 +1,22 @@
+﻿@model IEnumerable<SecretSanta_Core.Data.TblAgency>
+@{
+    ViewBag.Title = "Add Agency User";
+}
+
+<h2>Add Agency User</h2>
+<div class="row">
+<table class="table table-striped">
+    <tr>
+        <th width="75%">Agency Name</th>
+        <th width="25%">&nbsp;</th>
+    </tr>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td width="75%">@Html.DisplayFor(modelItem => m.AgencyName)</td>
+            <td width="25%"><a class="nav-link" asp-area="Identity" asp-page="/Account/Register" asp-route-id="@m.AgencyId">Add Primary</a></td>
+        </tr>
+    }
+</table>
+</div>
+

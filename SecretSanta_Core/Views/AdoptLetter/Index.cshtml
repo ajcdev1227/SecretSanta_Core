@@ -1,0 +1,24 @@
+﻿@model List<SecretSanta_Core.Models.AdoptLetterModel>
+@{
+    ViewData["Title"] = "Adopt A Letter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title</h1>
+<div><h4>Thank you for adopting a letter!   Scroll down the list to find one, and click "View" to see the letter.</h4>
+<h4>All gifts are due by @ViewBag.GiftDueDate.</h4>
+</div>
+<div class="spacer"></div>
+<table class="table table-striped">
+    <tbody>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td>@m.LetterSummary</td>
+            <td><a class="alink" href="@Url.Action("Letter", "AdoptLetter", new {id=m.LetterId})">View</a></td>
+        </tr>
+
+    }
+    </tbody>
+</table>
+

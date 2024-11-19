@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SecretSanta_Core.Models.FamilyMemberModel>
+@{
+    ViewData["Title"] = "FamilyMembers";
+    Layout = "~/Views/Shared/_LayoutLetter.cshtml";
+}
+
+<h3>We will now ask you to provide information for each person in the house that has a need.</h3>
+<input type="hidden" id="letterId" value="@ViewBag.LetterId" />
+<div class="row mb-3">
+    <div>
+        <button type="button" class="btn btn-primary" asp-action="AddFamilyMember" id="add">ADD NEW FAMILY MEMBER</button>
+    </div>
+</div>
+<table class="table" id="familyMemberTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="row mt-5">
+    <div class="col-2">
+        <button type="button" id="next" class="btn btn-primary w-100">NEXT</button>
+    </div>
+    <div class="col-2">
+        <button type="button" id="skip" class="btn btn-primary w-100">SKIP THIS STEP</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var status = @ViewBag.status;
+            if (status == 1) {
+                $('#next').prop('disabled', false);
+                $('#skip').prop('disabled', true);
+            } else {
+                $('#next').prop('disabled', true);
+                $('#skip').prop('disabled', false);
+            }
+        });
+    </script>
+    <environment names="Development">
+        <script src="~/js/familymembers.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/familymembers.min.js"></script>
+    </environment>
+}

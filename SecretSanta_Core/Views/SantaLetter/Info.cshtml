@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Info";
+    Layout = "~/Views/Shared/_LayoutLetter.cshtml";
+}
+
+<h3 style="text-align:justify">
+    <p>THANK YOU for all this useful information!  We are now ready to write the letter.</p>
+    <p>There are two ways to write your letter, one is to click “write my own letter” where you will have a page to enter whatever you wish.    The other option is to click “Guide me to write a letter”, where we ask questions and then construct the letter for you.    If you select “guide me” you will still have a chance to see the entire letter and make changes. </p>
+</h3>
+<div class="row d-flex justify-content-center align-items-center pt-3">
+    <button type="button" id="write" class="btn btn-secondary col-md-3" style="float:right">Write my own letter</button>
+    <div class="col-md-1"></div>
+    <button type="button" id="guide" class="btn btn-primary col-md-3" style="float:right">Guide me to write a letter</button>
+</div>
+
+@section Scripts{
+    <environment names="Development">
+        <script src="~/js/info.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/info.min.js"></script>
+    </environment>
+}

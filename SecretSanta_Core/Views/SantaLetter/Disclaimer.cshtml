@@ -1,0 +1,44 @@
+﻿@{
+	ViewData["Title"] = "Disclaimer";
+	Layout = "~/Views/Shared/_LayoutSimple.cshtml";
+}
+
+<input type="hidden" id="title" value="Santa Letter Received" />
+<input type="hidden" id="message" value="Your letter is being processed...check your email for confirmation." />
+
+<h2>Finish Application</h2>
+
+<div class='col-md-offset-10 col-md-2'>
+	<div class='row'>
+		<div style='padding-bottom:10px'>
+			<a href='/SantaLetter/Print' target='_blank' class='btn btn-default'><i class="fa fa-print fa-2x" aria-hidden="true"></i></a>
+		</div>
+	</div>
+</div>
+
+<div class='col-md-offset-10 col-md-2'>
+	<div class='row'>
+		<div style='padding-bottom:10px'>
+			<a href='/SantaLetter/Print' target='_blank' class='btn btn-default btn-print'></a>
+		</div>
+	</div>
+</div>
+<div class="italicize">
+	<p>By submitting this form, I allow the Secret Santa Program (Volunteer Center, Volunteers, KZST and Friedman’s Home Improvement) to share the information I have provided. I understand that completing this application does not guarantee the receiving of any gifts or food vouchers, and the quality and quantity of the gifts is dependent upon the generosity of donors. I agree to pick up gifts by 1/15 if I am granted or forfeit following year. I hereby give permission to release this information to Secret Santa for marketing and verification of information.</p>
+</div>
+<h3><label><input id="disclaimer" type="checkbox" />&nbsp;I Accept</label></h3>
+<div class="italicize">
+	<p>Please note your letter will not be processed until this application has been returned. Application submission does not guarantee you will receive items from Secret Santa. Secret Santa does its best to get items to recipients before 12/23, but some letters will not be filled by that date or may be filled in January. Items that exceed $25 may be delayed until February. Secret Santa will contact agencies once the letter has been fulfilled and to make arrangements for pick-up.</p>
+</div>
+<div class="offset-2 col-md-2 pt-3">
+	<button type="button" id="submit" class="btn btn-primary d-none">Submit</button>
+</div>
+
+@section Scripts {
+	<environment names="Development">
+		<script src="~/js/disclaimer.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/disclaimer.min.js"></script>
+	</environment>
+}

@@ -1,0 +1,156 @@
+﻿@model IEnumerable<SecretSanta_Core.Models.AgencyContactModel>
+
+@{
+	ViewData["Title"] = "Agency Contacts";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+	<div class="col-md-6">
+		<h2>@ViewBag.Title.</h2>
+	</div>
+	<div class="col-md-6">
+		<a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register" asp-route-id="@ViewBag.AgencyId" style="float:right">Add Agency User</a>
+	</div>
+</div>
+
+<div class="santalabel">@ViewBag.AgencyName</div>
+<div class="spacer-small"></div>
+<table class="table table-striped" id="agencyContactsTable">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Email)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.FirstName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.LastName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Roles)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Phone)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.AltPhone)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Fax)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.EstimateWishes)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.IsActive)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Email)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.FirstName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.LastName)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Roles)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Phone)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.AltPhone)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Fax)
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.EstimateWishes)
+				</td>
+				<td>
+					@Html.Raw(@item.IsActive ? "Active" : "InActive")
+				</td>
+				<td>
+					<button class="btn btn-primary" onclick='editAgency(@Html.Raw(Json.Serialize(@item)))'>Edit</button>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<div id="editAgencyModal" class="modal modal-sm" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Edit Agency</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="Edit" method="post" id="agencyForm">
+					<input type="hidden" id="Id" name="Id" />
+					<div class="my-3">
+						<label class="fomr-label">First Name</label>
+						<input class="form-control" id="FirstName" name="FirstName" />
+					</div>
+					<div class="my-3">
+						<label class="fomr-label">Last Name</label>
+						<input class="form-control" id="LastName" name="LastName" />
+					</div>
+					<div class="my-3">
+						<label class="fomr-label">Phone</label>
+						<input class="form-control" id="Phone" name="Phone"/>
+					</div>
+					<div class="my-3">
+						<label class="fomr-label">Alt Phone</label>
+						<input class="form-control" id="AltPhone" name="AltPhone" />
+					</div>
+					<div class="my-3">
+						<label class="fomr-label">Fax</label>
+						<input class="form-control" id="Fax" name="Fax" />
+					</div>
+					<div class="my-3">
+						<label class="fomr-label">Estimate Wishes</label>
+						<input class="form-control" id="EstimateWishes" name="EstimateWishes" />
+					</div>
+					<div class="my-3">
+						<label class="fomr-label">Status</label>
+						<select class="form-select" id="IsActive" name="IsActive">
+							<option value="true">Active</option>
+							<option value="false">InActive</option>
+						</select>
+					</div>
+					<div class="my-3">
+						<label class="fomr-label">Archive</label>
+						<select class="form-select" id="Archive" name="Archive">
+							<option value="false">False</option>
+							<option value="true">True</option>
+						</select>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="submit" class="btn btn-primary">Edit</button>
+			</div>
+		</div>
+	</div>
+</div>
+@section Scripts
+{
+	<environment names="Development">
+		<script src="~/js/AgencyUser/AgencyContacts.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/AgencyUser/AgencyContacts.min.js"></script>
+	</environment>
+}

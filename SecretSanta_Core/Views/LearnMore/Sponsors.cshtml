@@ -1,0 +1,83 @@
+﻿@model IEnumerable<SecretSanta_Core.Data.TblSponsor>
+
+@{
+    var pagesize = ViewBag.PageSize;
+    var count = ViewBag.Count;
+    var pageNumber = ViewBag.PageNumber;
+    ViewBag.Title = "Sponsors";
+}
+
+<h1>Sponsors</h1>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Sponsor Name
+        </th>
+        <th>
+            Sponsor Address
+        </th>
+        <th>
+            Sponsor City
+        </th>
+        <th>Sponsor Zip</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.SponsorName
+            </td>
+            <td>
+                @item.SponsorStreet
+            </td>
+            <td>
+                @item.SponsorCity
+            </td>
+            <td>
+                @item.SponsorZip
+            </td>
+        </tr>
+    }
+
+</table>
+@if (Model.Any())
+{
+    <div class="d-flex justify-content-center align-items-center">
+        <ul class="pagination">
+                @{ var c = (int)Math.Ceiling((double)count / (double)pagesize); }
+                @if (pageNumber > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Sponsors", "LearnMore", new {id = (pageNumber - 1)})"><i class="fa-solid fa-chevron-left"></i></a>
+                    </li>
+                }
+                @for (int i = Math.Min(pageNumber, c < 6 ? 1 : c - 4); i < Math.Min(5 + pageNumber, c + 1); i++)
+                {
+
+                    if (i == pageNumber)
+                    {
+                        <li class="page-item active">
+                            <a  class="page-link" href="#">@i.ToString()</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@Url.Action("Sponsors", "LearnMore", new {id = i})">@i.ToString()</a>
+                        </li>
+                    }
+
+                }
+                @if (pageNumber < c)
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Sponsors", "LearnMore", new {id = (pageNumber + 1)})"><i class="fa-solid fa-chevron-right"></i></a>
+                    </li>
+                }
+            </ul>
+
+        </div>
+}
+

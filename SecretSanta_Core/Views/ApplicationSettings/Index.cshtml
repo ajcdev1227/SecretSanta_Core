@@ -1,0 +1,77 @@
+﻿@model SecretSanta_Core.Models.ApplicationSettingsModel
+
+@{
+    ViewData["Title"] = "Application Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Application Settings</h1>
+
+<p>
+    <a asp-action="Add" asp-controller="ApplicationSettings">Add New Admin Setting</a>
+</p>
+@foreach (var m in Model.AdminSettings)
+{
+    <div class="row">
+        <div class="col-md-2">@Html.DisplayFor(modelItem => m.SettingsName)</div>
+        <div class="col-md-6">
+            @Html.DisplayFor(modelItem => m.SettingsValue)
+        </div>
+
+        <div class="col-md-2">
+            <a asp-action="Edit" asp-controller="ApplicationSettings" asp-route-id="@m.SettingsID">Edit</a> |
+            <a asp-action="Delete" asp-controller="ApplicationSettings" asp-route-id="@m.SettingsID">Delete</a>
+        </div>
+    </div>
+    <div class="spacer"></div>
+}
+<div class="row">
+    <div class="col-md-2">
+        Heart Central Dates
+    </div>
+    <div class="col-md-6">
+        @Model.HeartCentralDates.TheseDates.StartDate.ToShortDateString()<span>&nbsp; Thru &nbsp;</span>
+        @Model.HeartCentralDates.TheseDates.EndDate.ToShortDateString()
+    </div>
+    <div class="col-md-2">
+        <a asp-action="EditDates" asp-controller="ApplicationSettings" asp-route-id="HeartCentral">Edit</a>
+    </div>
+</div>
+<div class="spacer-small"></div>
+<h3>Santa Admin Emails</h3>
+<table class="table">
+    <tr>
+        <th>
+            Email Name
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.AdminEmails)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailName)
+            </td>
+            <td>
+                <a asp-action="EditAdminEmail" asp-controller="ApplicationSettings" asp-route-id="@item.EmailId">Edit</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<h3>Home Image</h3>
+<div class="spacer"></div>
+@foreach (var i in Model.HomeImageModel)
+{
+    <div class="p-5">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="@i.ImageUri" class="img-fluid" />
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Replace", "Image", new { id = i.SettingsID })
+            </div>
+        </div>
+    </div>
+}
+<div class="spacer"></div>
