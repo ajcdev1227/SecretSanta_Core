@@ -1,6 +1,6 @@
 # SecretSanta Core
 
-SecretSanta Core is the backend application powering the [Secret Santa website](https://www.secretsantanow.org/). It facilitates seamless holiday gift exchanges with robust features such as payment integration, scheduling, and email notifications.
+SecretSanta Core is the .NET MVC application powering the [Secret Santa website](https://www.secretsantanow.org/). It facilitates seamless holiday gift exchanges with robust features such as payment integration, scheduling, and email notifications.
 
 ## Features
 
